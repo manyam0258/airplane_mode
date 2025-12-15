@@ -1,0 +1,41 @@
+<style>
+	.custom-card {
+		box-shadow: rgba(0, 0, 0, 0.35) 1px 5px 15px;
+		padding: 25px;
+		margin-bottom: 10px;
+		border-radius: 5px;
+		margin-top: 5px;
+	}
+
+	.custom-card a {
+		color: #007bff;
+		font-size: medium;
+	}
+
+	.heading {
+		font-weight: bold;
+	}
+
+	.spacer {
+		margin-bottom: 20px;
+	}
+</style>
+<div class="custom-card">
+	<div class="heading">
+		{% set airline = frappe.db.get_value('Airplane',doc.airplane,'airline') %}
+		{{airline}}
+	</div>
+	<div class="spacer"></div>
+	<div>{{doc.source_airport_code}}<span> ➙ </span>{{doc.destination_airport_code}}</div>
+
+	<div>{{ frappe.utils.format_date(doc.date_of_departure, "dd MMMM, yyyy") }} |
+		{{doc.time_of_departure}} |
+		{{frappe.utils.format_duration(doc.duration)}}
+		<!-- {% set hours = doc.duration // 3600 %}
+    {% set minutes = (doc.duration % 3600) // 60 %}
+    {{ hours }}h {{ minutes }}m -->
+	</div>
+	<div class="spacer"></div>
+	<a href="/{{ doc.route |e }}">View Flight</a>
+</div>
+<!-- this is a sample default list template -->

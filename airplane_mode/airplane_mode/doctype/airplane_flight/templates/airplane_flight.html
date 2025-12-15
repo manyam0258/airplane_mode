@@ -1,0 +1,68 @@
+<style>
+    .custom-card {
+        box-shadow: rgba(0, 0, 0, 0.35) 1px 5px 15px;
+        padding: 25px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        margin-top: 15px;
+        max-width: fit-content;
+    }
+
+    .custom-card ul {
+        font-weight: 200;
+        font-size: medium;
+    }
+
+    .heading {
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    .spacer {
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        background-color: #5faaf0;
+        /* Change background color */
+        border-color: #5faaf0;
+        ;
+        /* Change border color */
+        color: #fff;
+        /* Change text color */
+    }
+
+    .btn-primary {
+        padding: 10px 30px !important;
+    }
+</style>
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+
+<h1>{{ title |e }}</h1>
+
+<div class="custom-card">
+    <div class="heading"> Flight Details</div>
+    <ul>
+        <li>
+            {% set airline = frappe.db.get_value('Airplane',doc.airplane,'airline') %}
+            Airline: {{airline}}
+        </li>
+        <li>
+            {{doc.source_airport_code}}<span> ➙ </span>{{doc.destination_airport_code}}
+        </li>
+        <li>
+            {{ frappe.utils.format_date(doc.date_of_departure, "dd MMMM, yyyy") }} |
+            {{doc.time_of_departure}}
+
+        </li>
+        <li>
+            Duration: {{frappe.utils.format_duration(doc.duration)}}
+        </li>
+    </ul>
+    <div class="spacer"></div>
+    <a class="btn btn-primary" href="/book-flight-ticket/new?flight_price=10000&flight={{ doc.name }}"
+        role="button">Book Flight</a>
+</div>
+{% endblock %}
