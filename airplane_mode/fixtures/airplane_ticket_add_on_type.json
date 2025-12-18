@@ -1,0 +1,37 @@
+[
+ {
+  "description": "Early boarding access",
+  "docstatus": 0,
+  "doctype": "Airplane Ticket Add-on Type",
+  "modified": "2025-12-18 20:40:41.524810",
+  "name": "Priority Boarding"
+ },
+ {
+  "description": "Preferred window seat",
+  "docstatus": 0,
+  "doctype": "Airplane Ticket Add-on Type",
+  "modified": "2025-12-18 20:40:50.731314",
+  "name": "Window Seat"
+ },
+ {
+  "description": "Travel insurance coverage",
+  "docstatus": 0,
+  "doctype": "Airplane Ticket Add-on Type",
+  "modified": "2025-12-18 20:41:04.272989",
+  "name": "Travel Insurance"
+ },
+ {
+  "description": "Meals",
+  "docstatus": 0,
+  "doctype": "Airplane Ticket Add-on Type",
+  "modified": "2025-12-12 14:17:12.314603",
+  "name": "Meals"
+ },
+ {
+  "description": "Baggage",
+  "docstatus": 0,
+  "doctype": "Airplane Ticket Add-on Type",
+  "modified": "2025-12-12 14:17:24.281598",
+  "name": "Baggage"
+ }
+]
