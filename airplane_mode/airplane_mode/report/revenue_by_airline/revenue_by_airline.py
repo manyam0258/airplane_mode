@@ -40,38 +40,30 @@ def get_columns():
 # Data Logic (NO SQL, NO get_doc)
 # --------------------------------------------------
 def get_data():
-    # 1. Fetch all airlines (including 0 revenue ones)
+    # Fetch ALL airlines (even those with zero revenue)
     airlines = frappe.get_all("Airline", fields=["name"])
-
     revenue_map = {a.name: 0 for a in airlines}
 
-    # 2. Fetch submitted tickets only
+    # Fetch submitted tickets only
     tickets = frappe.get_all(
         "Airplane Ticket", filters={"docstatus": 1}, fields=["total_amount", "flight"]
     )
 
-    # 3. Resolve flight -> airplane -> airline (DB ONLY)
     for ticket in tickets:
         airplane = frappe.db.get_value("Airplane Flight", ticket.flight, "airplane")
-
         if not airplane:
             continue
 
         airline = frappe.db.get_value("Airplane", airplane, "airline")
-
         if airline:
             revenue_map[airline] += flt(ticket.total_amount)
 
-    # 4. Build rows + total
     data = []
     total_revenue = 0
 
     for airline, revenue in revenue_map.items():
         data.append({"airline": airline, "revenue": revenue})
         total_revenue += revenue
-
-    # 5. Total row
-    data.append({"airline": _("Total"), "revenue": total_revenue})
 
     return data, total_revenue
 
@@ -84,7 +76,7 @@ def get_chart(data):
     values = []
 
     for row in data:
-        if row["airline"] != _("Total") and row["revenue"] > 0:
+        if row["revenue"] > 0:
             labels.append(row["airline"])
             values.append(row["revenue"])
 
@@ -98,7 +90,7 @@ def get_chart(data):
 
 
 # --------------------------------------------------
-# Summary
+# Summary (TOTAL ONLY HERE)
 # --------------------------------------------------
 def get_summary(total_revenue):
     return [
