@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+{% set color = frappe.form_dict.get("color") or "Black" %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Display</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .color-box {
+            width: 1000px;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Full-Screen Rectangle with Dynamic Background Color -->
+    <div class="color-box"></div>
+    <script>
+        const colorBox = document.querySelector('.color-box');
+        const boxColor = "{{ color }}";
+        if (colorBox) {
+            colorBox.style.backgroundColor = boxColor;
+        }
+    </script>
+</body>
+
+</html>

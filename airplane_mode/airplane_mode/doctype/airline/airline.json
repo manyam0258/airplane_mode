@@ -10,7 +10,8 @@
   "founding_year",
   "customer_care_number",
   "column_break_eake",
-  "headquarters"
+  "headquarters",
+  "website"
  ],
  "fields": [
   {
@@ -35,6 +36,12 @@
   {
    "fieldname": "column_break_eake",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "website",
+   "fieldtype": "Data",
+   "label": "Website",
+   "options": "URL"
   }
  ],
  "grid_page_length": 50,
@@ -45,7 +52,7 @@
    "link_fieldname": "airline"
   }
  ],
- "modified": "2025-12-12 11:20:43.529769",
+ "modified": "2025-12-18 17:22:00.807453",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airline",
