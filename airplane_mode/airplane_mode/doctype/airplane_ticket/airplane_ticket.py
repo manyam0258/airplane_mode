@@ -1,43 +1,84 @@
 # Copyright (c) 2025, surendhranath and contributors
 # For license information, please see license.txt
 
+# Copyright (c) 2025
+# License: MIT
+
 import frappe
+from frappe import _
 from frappe.model.document import Document
 import random
 
+
 class AirplaneTicket(Document):
+
+    # -------------------------
+    # VALIDATE (WEB FORM SAFE)
+    # -------------------------
     def validate(self):
+        self.validate_add_ons()
+        self.calculate_total_amount()
+        self.assign_seat_if_missing()
 
-        #To eliminate Duplicates Add-on's
-        item_set = set()
-        total_add_ons = 0
-        for value in self.add_ons:
-            if value.item in item_set:
-                frappe.throw(f"The '{value.item}' Add-on has already been added in your Ticket. Please pick another Add-on.")
-                
-            item_set.add(value.item)
-            
-			#Add-on amount calculation
-            total_add_ons += value.amount
+    # -------------------------
+    # ADD-ON DUPLICATE CHECK
+    # -------------------------
+    def validate_add_ons(self):
+        seen = set()
+        for row in self.add_ons:
+            if row.item in seen:
+                frappe.throw(
+                    _("The '{0}' Add-on has already been added").format(row.item)
+                )
+            seen.add(row.item)
 
-        if total_add_ons:
-            #Total Amount  calculation
-            self.total_amount = self.flight_price + total_add_ons
-        elif not total_add_ons:
-            #Total Amount  calculation when no Add_on
-            self.total_amount = self.flight_price
-        
-        #Random Seat generator when empty
-        if self.seat:
+    # -------------------------
+    # TOTAL AMOUNT CALCULATION
+    # -------------------------
+    def calculate_total_amount(self):
+        add_on_total = sum((row.amount or 0) for row in self.add_ons)
+        self.total_amount = (self.flight_price or 0) + add_on_total
+
+    # -------------------------
+    # SEAT ASSIGNMENT (SAFE)
+    # -------------------------
+    def assign_seat_if_missing(self):
+        if self.seat or not self.flight:
             return
-        elif not self.seat:
-            random_number = random.randint(1, 99)
-            random_alphabet = random.choice(["A", "B", "C", "D", "E"])
 
-            self.seat = f"{random_number}{random_alphabet}"
+        airplane = frappe.db.get_value("Airplane Flight", self.flight, "airplane")
 
+        if not airplane:
+            return
+
+        capacity = frappe.db.get_value("Airplane", airplane, "capacity")
+
+        if not capacity:
+            return
+
+        # Simple safe seat assignment
+        self.seat = (
+            f"{random.randint(1, capacity)}{random.choice(['A','B','C','D','E'])}"
+        )
+
+    # -------------------------
+    # DESK-ONLY SUBMIT RULES
+    # -------------------------
     def before_submit(self):
-        #To check before submitting the form if the status is not 'Boarded'
         if self.status != "Boarded":
-            frappe.throw("You cannot submit this document until you are 'Boarded'.")
-            
+            frappe.throw(_("You cannot submit this document until you are Boarded"))
+
+        airplane = frappe.db.get_value("Airplane Flight", self.flight, "airplane")
+
+        capacity = frappe.db.get_value("Airplane", airplane, "capacity") or 0
+
+        booked = frappe.db.count(
+            "Airplane Ticket", {"flight": self.flight, "docstatus": 1}
+        )
+
+        # exclude self if resubmitting
+        if self.docstatus == 1:
+            booked -= 1
+
+        if booked >= capacity:
+            frappe.throw(_("Flight capacity reached. Cannot submit more tickets."))
