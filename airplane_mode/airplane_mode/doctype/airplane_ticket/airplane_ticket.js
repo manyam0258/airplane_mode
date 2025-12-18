@@ -17,7 +17,7 @@ frappe.ui.form.on("Airplane Ticket", {
                     {
                         fieldname: 'seat',
                         fieldtype: 'Data',
-                        label: __('Seat (e.g. 3B)'),
+                        label: __('Seat (e.g. 12A)'),
                         reqd: 1
                     }
                 ],
@@ -34,7 +34,7 @@ frappe.ui.form.on("Airplane Ticket", {
     // UX-only duplicate prevention
     validate(frm) {
         const seen = new Set();
-        for (let row of (frm.doc.add_ons || [])) {
+        (frm.doc.add_ons || []).forEach(row => {
             if (seen.has(row.item)) {
                 frappe.validated = false;
                 frappe.msgprint({
@@ -42,10 +42,9 @@ frappe.ui.form.on("Airplane Ticket", {
                     message: __('Duplicate add-on: {0}', [row.item]),
                     indicator: 'red'
                 });
-                break;
             }
             seen.add(row.item);
-        }
+        });
     },
 
     update_total_amount(frm) {
