@@ -10,6 +10,7 @@
   "section_break_fn8t",
   "amended_from",
   "airplane",
+  "gate_no",
   "column_break_ppey",
   "status",
   "is_published",
@@ -24,7 +25,9 @@
   "source_airport_code",
   "column_break_uzga",
   "destination_airport",
-  "destination_airport_code"
+  "destination_airport_code",
+  "crew_members_section",
+  "crew_members"
  ],
  "fields": [
   {
@@ -135,6 +138,24 @@
    "label": "Route",
    "read_only": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "crew_members_section",
+   "fieldtype": "Section Break",
+   "label": "Crew Members"
+  },
+  {
+   "fieldname": "crew_members",
+   "fieldtype": "Table",
+   "label": "Crew Members",
+   "options": "Crew Member"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "gate_no",
+   "fieldtype": "Select",
+   "label": "Gate No",
+   "options": "\nGT-1\nGT-2\nGT-3\nGT-4"
   }
  ],
  "grid_page_length": 50,
@@ -148,7 +169,7 @@
    "link_fieldname": "flight"
   }
  ],
- "modified": "2025-12-18 21:56:21.593415",
+ "modified": "2025-12-22 21:49:08.080922",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Flight",
@@ -223,5 +244,6 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }

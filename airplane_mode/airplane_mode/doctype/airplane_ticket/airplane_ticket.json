@@ -15,6 +15,7 @@
   "flight",
   "destination_airport_code",
   "status",
+  "gate_no",
   "section_break_pxzd",
   "add_ons",
   "section_break_ywho",
@@ -148,13 +149,19 @@
    "fieldname": "total_amount",
    "fieldtype": "Currency",
    "label": "Total Amount"
+  },
+  {
+   "fetch_from": "flight.gate_no",
+   "fieldname": "gate_no",
+   "fieldtype": "Data",
+   "label": "Gate No"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-18 21:55:30.869771",
+ "modified": "2025-12-22 13:02:14.685914",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
  "name": "Airplane Ticket",
