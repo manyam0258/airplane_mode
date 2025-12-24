@@ -38,35 +38,48 @@
   {
    "fieldname": "shop",
    "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Shop",
    "options": "Shop"
   },
   {
    "fieldname": "tenant",
    "fieldtype": "Link",
+   "in_filter": 1,
+   "in_standard_filter": 1,
    "label": "Tenant",
    "options": "Tenant"
   },
   {
    "fieldname": "rent_amount",
    "fieldtype": "Currency",
-   "label": "Rent Amount"
+   "in_list_view": 1,
+   "label": "Rent Amount",
+   "non_negative": 1,
+   "precision": "2"
   },
   {
    "fieldname": "start_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Start Date"
   },
   {
    "fieldname": "end_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "End Date"
   },
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
-   "options": "\nDraft\nActive\nExpired"
+   "options": "\nDraft\nActive\nExpired\nScheduled"
   },
   {
    "fieldname": "column_break_vahb",
@@ -91,8 +104,13 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2025-12-24 18:00:24.490157",
+ "links": [
+  {
+   "link_doctype": "Shop Rent Payment",
+   "link_fieldname": "contract"
+  }
+ ],
+ "modified": "2025-12-24 23:35:45.850193",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "Contract",
@@ -100,6 +118,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -117,6 +136,23 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
+ "states": [
+  {
+   "color": "Red",
+   "title": "Draft"
+  },
+  {
+   "color": "Green",
+   "title": "Active"
+  },
+  {
+   "color": "Orange",
+   "title": "Scheduled"
+  },
+  {
+   "color": "Red",
+   "title": "Expired"
+  }
+ ],
  "track_changes": 1
 }

@@ -13,7 +13,8 @@
   "tenant",
   "column_break_fpqm",
   "payment_date",
-  "status"
+  "status",
+  "rent_amount"
  ],
  "fields": [
   {
@@ -33,6 +34,9 @@
   {
    "fieldname": "contract",
    "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Contract",
    "options": "Contract"
   },
@@ -40,12 +44,18 @@
    "fetch_from": "contract.shop",
    "fieldname": "shop",
    "fieldtype": "Read Only",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Shop"
   },
   {
    "fetch_from": "contract.tenant",
    "fieldname": "tenant",
    "fieldtype": "Read Only",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Tenant"
   },
   {
@@ -60,15 +70,25 @@
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "\nDue\nPaid"
+  },
+  {
+   "fetch_from": "contract.rent_amount",
+   "fieldname": "rent_amount",
+   "fieldtype": "Currency",
+   "label": "Rent Amount",
+   "precision": "2"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-24 18:29:19.374648",
+ "modified": "2025-12-24 23:37:10.240668",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "Shop Rent Payment",

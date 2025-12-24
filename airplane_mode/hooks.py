@@ -161,6 +161,13 @@ app_license = "gpl-3.0"
 # 	],
 # }
 
+scheduler_events = {
+    "daily": [
+        "airplane_mode.airport_shop_management.scheduler.contract_lifecycle.update_contract_lifecycle"
+    ]
+}
+
+
 # Testing
 # -------
 

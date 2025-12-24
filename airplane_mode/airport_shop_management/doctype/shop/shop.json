@@ -2,7 +2,6 @@
  "actions": [],
  "allow_guest_to_view": 1,
  "allow_rename": 1,
- "autoname": "format:{shop_no}-{####}",
  "creation": "2025-12-22 22:59:09.636802",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -38,7 +37,8 @@
    "fieldname": "area",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Area"
+   "label": "Area",
+   "precision": "2"
   },
   {
    "fieldname": "photo",
@@ -82,15 +82,20 @@
   }
  ],
  "grid_page_length": 50,
+ "has_web_view": 1,
  "image_field": "photo",
  "index_web_pages_for_search": 1,
  "is_published_field": "is_published",
- "links": [],
- "modified": "2025-12-23 21:41:51.398977",
+ "links": [
+  {
+   "link_doctype": "Contract",
+   "link_fieldname": "shop"
+  }
+ ],
+ "modified": "2025-12-24 23:35:17.078262",
  "modified_by": "Administrator",
  "module": "Airport Shop Management",
  "name": "Shop",
- "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -106,6 +111,7 @@
    "write": 1
   }
  ],
+ "route": "shops",
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
  "show_title_field_in_link": 1,

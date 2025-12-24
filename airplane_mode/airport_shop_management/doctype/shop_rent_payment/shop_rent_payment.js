@@ -6,3 +6,9 @@
 
 // 	},
 // });
+frappe.ui.form.on("Shop Rent Payment", {
+    contract(frm) {
+        // Ensure validations re-run correctly
+        frm.refresh_field("payment_date");
+    }
+});
