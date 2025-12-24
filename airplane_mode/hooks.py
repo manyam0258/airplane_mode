@@ -164,9 +164,11 @@ app_license = "gpl-3.0"
 scheduler_events = {
     "daily": [
         "airplane_mode.airport_shop_management.scheduler.contract_lifecycle.update_contract_lifecycle"
-    ]
+    ],
+    "monthly": [
+        "airplane_mode.airport_shop_management.scheduler.rent_reminder.send_monthly_rent_reminders"
+    ],
 }
-
 
 # Testing
 # -------
