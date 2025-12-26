@@ -259,4 +259,7 @@ scheduler_events = {
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
-fixtures = [{"dt": "Airplane Ticket Add-on Type", "filters": []}]
+fixtures = [
+    {"dt": "Airplane Ticket Add-on Type", "filters": []},
+    {"dt": "Shop Type", "filters": []},
+]

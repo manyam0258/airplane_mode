@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Available Shops</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+    <style>
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .shop-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .shop-card img {
+            height: 180px;
+            object-fit: cover;
+            background: #f5f5f5;
+        }
+
+        .shop-card .content {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Available Shops</h2>
+
+    <div class="shop-grid">
+        {% for shop in shops %}
+        <div class="card shop-card">
+
+            {% if shop.photo %}
+            <img src="{{ shop.photo }}" alt="Shop Image">
+            {% else %}
+            <img src="https://via.placeholder.com/400x180?text=No+Image" alt="No Image">
+            {% endif %}
+
+            <div class="content">
+                <h4>Shop {{ shop.shop_no }}</h4>
+                <p><b>Location:</b> {{ shop.location }}</p>
+                <p><b>Area:</b> {{ shop.area }} Sq.Ft</p>
+            </div>
+
+            <footer>
+                <a class="button" href="/shops/details?name={{ shop.name }}">
+                    View Details
+                </a>
+            </footer>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>
