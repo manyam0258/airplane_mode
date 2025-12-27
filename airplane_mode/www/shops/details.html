@@ -98,16 +98,13 @@
                     <div class="info-label">Status</div>
                     <div class="info-value">{{ shop.status }}</div>
                 </div>
+                <a class="button success" href="/shop-lead?shop_id={{ shop.name }}">
+                    I'm Interested
+                </a>
 
-                <div class="actions">
-                    <a class="button success" href="/shop-lead/new?shop={{ shop.name }}">
-                        I'm Interested
-                    </a>
-
-                    <a class="button" href="/shops">
-                        Back to Shops
-                    </a>
-                </div>
+                <a class="button" href="/shops">
+                    Back to Shops
+                </a>
             </div>
 
         </div>
